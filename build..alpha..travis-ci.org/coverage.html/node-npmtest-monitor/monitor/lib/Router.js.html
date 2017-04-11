@@ -1,0 +1,2873 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <title>Code coverage report for node-npmtest-monitor/monitor/lib/Router.js</title>
+    <meta charset="utf-8">
+    <style>
+        body, html {
+            margin:0; padding: 0;
+        }
+        body {
+            font-family: Arial, Helvetica;
+            font-size: 10pt;
+        }
+        div.header, div.footer {
+            background: #eee;
+            padding: 1em;
+        }
+        div.header {
+            height: 160px;
+            padding: 0 1em 0 1em;
+            z-index: 100;
+            position: fixed;
+            top: 0;
+            border-bottom: 1px solid #666;
+            width: 100%;
+        }
+        div.footer {
+            border-top: 1px solid #666;
+        }
+        div.body {
+            margin-top: 170px;
+        }
+        div.meta {
+            font-size: 90%;
+            text-align: center;
+        }
+        h1, h2, h3 {
+            font-weight: normal;
+        }
+        h1 {
+            font-size: 12pt;
+        }
+        h2 {
+            font-size: 10pt;
+        }
+        pre {
+            font-family: Menlo, Monaco, Consolas, Courier New, monospace;
+            margin: 0;
+            padding: 0;
+            font-size: 14px;
+            tab-size: 2;
+        }
+
+        div.path { font-size: 110%; }
+        div.path a:link, div.path a:visited { color: #000; }
+        table.coverage { border-collapse: collapse; margin:0; padding: 0 }
+
+        table.coverage td {
+            margin: 0;
+            padding: 0;
+            color: #111;
+            vertical-align: top;
+        }
+        table.coverage td.line-count {
+            width: 50px;
+            text-align: right;
+            padding-right: 5px;
+        }
+        table.coverage td.line-coverage {
+            color: #777 !important;
+            text-align: right;
+            border-left: 1px solid #666;
+            border-right: 1px solid #666;
+        }
+
+        table.coverage td.text {
+        }
+
+        table.coverage td span.cline-any {
+            display: inline-block;
+            padding: 0 5px;
+            width: 40px;
+        }
+        table.coverage td span.cline-neutral {
+            background: #eee;
+        }
+        table.coverage td span.cline-yes {
+            background: #b5d592;
+            color: #999;
+        }
+        table.coverage td span.cline-no {
+            background: #fc8c84;
+        }
+
+        .cstat-yes { color: #111; }
+        .cstat-no { background: #fc8c84; color: #111; }
+        .fstat-no { background: #ffc520; color: #111 !important; }
+        .cbranch-no { background:  yellow !important; color: #111; }
+
+        .cstat-skip { background: #ddd; color: #111; }
+        .fstat-skip { background: #ddd; color: #111 !important; }
+        .cbranch-skip { background: #ddd !important; color: #111; }
+
+        .missing-if-branch {
+            display: inline-block;
+            margin-right: 10px;
+            position: relative;
+            padding: 0 4px;
+            background: black;
+            color: yellow;
+        }
+
+        .skip-if-branch {
+            display: none;
+            margin-right: 10px;
+            position: relative;
+            padding: 0 4px;
+            background: #ccc;
+            color: white;
+        }
+
+        .missing-if-branch .typ, .skip-if-branch .typ {
+            color: inherit !important;
+        }
+
+        .entity, .metric { font-weight: bold; }
+        .metric { display: inline-block; border: 1px solid #333; padding: 0.3em; background: white; }
+        .metric small { font-size: 80%; font-weight: normal; color: #666; }
+
+        div.coverage-summary table { border-collapse: collapse; margin: 3em; font-size: 110%; }
+        div.coverage-summary td, div.coverage-summary table  th { margin: 0; padding: 0.25em 1em; border-top: 1px solid #666; border-bottom: 1px solid #666; }
+        div.coverage-summary th { text-align: left; border: 1px solid #666; background: #eee; font-weight: normal; }
+        div.coverage-summary th.file { border-right: none !important; }
+        div.coverage-summary th.pic { border-left: none !important; text-align: right; }
+        div.coverage-summary th.pct { border-right: none !important; }
+        div.coverage-summary th.abs { border-left: none !important; text-align: right; }
+        div.coverage-summary td.pct { text-align: right; border-left: 1px solid #666; }
+        div.coverage-summary td.abs { text-align: right; font-size: 90%; color: #444; border-right: 1px solid #666; }
+        div.coverage-summary td.file { text-align: right; border-left: 1px solid #666; white-space: nowrap;  }
+        div.coverage-summary td.pic { min-width: 120px !important;  }
+        div.coverage-summary a:link { color: #000; }
+        div.coverage-summary a:visited { color: #333; }
+        div.coverage-summary tfoot td { border-top: 1px solid #666; }
+
+        div.coverage-summary .yui3-datatable-sort-indicator, div.coverage-summary .dummy-sort-indicator {
+            height: 10px;
+            width: 7px;
+            display: inline-block;
+            margin-left: 0.5em;
+        }
+        div.coverage-summary .yui3-datatable-sort-indicator {
+            background: no-repeat scroll 0 0 transparent;
+        }
+        div.coverage-summary .yui3-datatable-sorted .yui3-datatable-sort-indicator {
+            background-position: 0 -20px;
+        }
+        div.coverage-summary .yui3-datatable-sorted-desc .yui3-datatable-sort-indicator {
+            background-position: 0 -10px;
+        }
+
+        .high { background: #b5d592 !important; }
+        .medium { background: #ffe87c !important; }
+        .low { background: #fc8c84 !important; }
+
+        span.cover-fill, span.cover-empty {
+            display:inline-block;
+            border:1px solid #444;
+            background: white;
+            height: 12px;
+        }
+        span.cover-fill {
+            background: #ccc;
+            border-right: 1px solid #444;
+        }
+        span.cover-empty {
+            background: white;
+            border-left: none;
+        }
+        span.cover-full {
+            border-right: none !important;
+        }
+        pre.prettyprint {
+            border: none !important;
+            padding: 0 !important;
+            margin: 0 !important;
+        }
+        .com { color: #999 !important; }
+        .ignore-none { color: #999; font-weight: normal; }
+
+    </style>
+</head>
+<body>
+<div class="header low">
+    <h1 style="font-weight: bold;">
+        <a href="https://github.com/npmtest/node-npmtest-monitor">npmtest-monitor (v0.0.1)</a>
+    </h1>
+    <h1>Code coverage report for <span class="entity">node-npmtest-monitor/monitor/lib/Router.js</span></h1>
+    <h2>
+        
+        Statements: <span class="metric">1.33% <small>(4 / 301)</small></span> &nbsp;&nbsp;&nbsp;&nbsp;
+        
+        
+        Branches: <span class="metric">3.13% <small>(5 / 160)</small></span> &nbsp;&nbsp;&nbsp;&nbsp;
+        
+        
+        Functions: <span class="metric">2.13% <small>(1 / 47)</small></span> &nbsp;&nbsp;&nbsp;&nbsp;
+        
+        
+        Lines: <span class="metric">1.37% <small>(4 / 292)</small></span> &nbsp;&nbsp;&nbsp;&nbsp;
+        
+        Ignored: <span class="metric"><span class="ignore-none">none</span></span> &nbsp;&nbsp;&nbsp;&nbsp;
+    </h2>
+    <div class="path"><a href="../../../index.html">All files</a> &#187; <a href="index.html">node-npmtest-monitor/monitor/lib/</a> &#187; Router.js</div>
+</div>
+<div class="body">
+<pre><table class="coverage">
+<tr><td class="line-count">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
+31
+32
+33
+34
+35
+36
+37
+38
+39
+40
+41
+42
+43
+44
+45
+46
+47
+48
+49
+50
+51
+52
+53
+54
+55
+56
+57
+58
+59
+60
+61
+62
+63
+64
+65
+66
+67
+68
+69
+70
+71
+72
+73
+74
+75
+76
+77
+78
+79
+80
+81
+82
+83
+84
+85
+86
+87
+88
+89
+90
+91
+92
+93
+94
+95
+96
+97
+98
+99
+100
+101
+102
+103
+104
+105
+106
+107
+108
+109
+110
+111
+112
+113
+114
+115
+116
+117
+118
+119
+120
+121
+122
+123
+124
+125
+126
+127
+128
+129
+130
+131
+132
+133
+134
+135
+136
+137
+138
+139
+140
+141
+142
+143
+144
+145
+146
+147
+148
+149
+150
+151
+152
+153
+154
+155
+156
+157
+158
+159
+160
+161
+162
+163
+164
+165
+166
+167
+168
+169
+170
+171
+172
+173
+174
+175
+176
+177
+178
+179
+180
+181
+182
+183
+184
+185
+186
+187
+188
+189
+190
+191
+192
+193
+194
+195
+196
+197
+198
+199
+200
+201
+202
+203
+204
+205
+206
+207
+208
+209
+210
+211
+212
+213
+214
+215
+216
+217
+218
+219
+220
+221
+222
+223
+224
+225
+226
+227
+228
+229
+230
+231
+232
+233
+234
+235
+236
+237
+238
+239
+240
+241
+242
+243
+244
+245
+246
+247
+248
+249
+250
+251
+252
+253
+254
+255
+256
+257
+258
+259
+260
+261
+262
+263
+264
+265
+266
+267
+268
+269
+270
+271
+272
+273
+274
+275
+276
+277
+278
+279
+280
+281
+282
+283
+284
+285
+286
+287
+288
+289
+290
+291
+292
+293
+294
+295
+296
+297
+298
+299
+300
+301
+302
+303
+304
+305
+306
+307
+308
+309
+310
+311
+312
+313
+314
+315
+316
+317
+318
+319
+320
+321
+322
+323
+324
+325
+326
+327
+328
+329
+330
+331
+332
+333
+334
+335
+336
+337
+338
+339
+340
+341
+342
+343
+344
+345
+346
+347
+348
+349
+350
+351
+352
+353
+354
+355
+356
+357
+358
+359
+360
+361
+362
+363
+364
+365
+366
+367
+368
+369
+370
+371
+372
+373
+374
+375
+376
+377
+378
+379
+380
+381
+382
+383
+384
+385
+386
+387
+388
+389
+390
+391
+392
+393
+394
+395
+396
+397
+398
+399
+400
+401
+402
+403
+404
+405
+406
+407
+408
+409
+410
+411
+412
+413
+414
+415
+416
+417
+418
+419
+420
+421
+422
+423
+424
+425
+426
+427
+428
+429
+430
+431
+432
+433
+434
+435
+436
+437
+438
+439
+440
+441
+442
+443
+444
+445
+446
+447
+448
+449
+450
+451
+452
+453
+454
+455
+456
+457
+458
+459
+460
+461
+462
+463
+464
+465
+466
+467
+468
+469
+470
+471
+472
+473
+474
+475
+476
+477
+478
+479
+480
+481
+482
+483
+484
+485
+486
+487
+488
+489
+490
+491
+492
+493
+494
+495
+496
+497
+498
+499
+500
+501
+502
+503
+504
+505
+506
+507
+508
+509
+510
+511
+512
+513
+514
+515
+516
+517
+518
+519
+520
+521
+522
+523
+524
+525
+526
+527
+528
+529
+530
+531
+532
+533
+534
+535
+536
+537
+538
+539
+540
+541
+542
+543
+544
+545
+546
+547
+548
+549
+550
+551
+552
+553
+554
+555
+556
+557
+558
+559
+560
+561
+562
+563
+564
+565
+566
+567
+568
+569
+570
+571
+572
+573
+574
+575
+576
+577
+578
+579
+580
+581
+582
+583
+584
+585
+586
+587
+588
+589
+590
+591
+592
+593
+594
+595
+596
+597
+598
+599
+600
+601
+602
+603
+604
+605
+606
+607
+608
+609
+610
+611
+612
+613
+614
+615
+616
+617
+618
+619
+620
+621
+622
+623
+624
+625
+626
+627
+628
+629
+630
+631
+632
+633
+634
+635
+636
+637
+638
+639
+640
+641
+642
+643
+644
+645
+646
+647
+648
+649
+650
+651
+652
+653
+654
+655
+656
+657
+658
+659
+660
+661
+662
+663
+664
+665
+666
+667
+668
+669
+670
+671
+672
+673
+674
+675
+676
+677
+678
+679
+680
+681
+682
+683
+684
+685
+686
+687
+688
+689
+690
+691
+692
+693
+694
+695
+696
+697
+698
+699
+700
+701
+702
+703
+704
+705
+706
+707
+708
+709
+710
+711
+712
+713
+714
+715
+716
+717
+718
+719
+720
+721
+722
+723
+724
+725
+726
+727
+728
+729
+730
+731
+732
+733
+734
+735
+736
+737
+738
+739
+740
+741
+742
+743
+744
+745
+746
+747
+748
+749
+750
+751
+752
+753
+754
+755
+756
+757
+758
+759
+760
+761
+762
+763
+764
+765
+766
+767
+768
+769
+770
+771
+772
+773
+774
+775
+776
+777
+778
+779
+780
+781
+782
+783
+784
+785
+786
+787
+788
+789
+790
+791
+792
+793
+794
+795
+796
+797
+798
+799
+800
+801
+802
+803
+804
+805
+806
+807
+808
+809
+810
+811
+812
+813
+814
+815
+816
+817
+818
+819
+820
+821
+822
+823
+824
+825
+826
+827
+828
+829
+830
+831
+832
+833
+834
+835
+836
+837
+838
+839
+840
+841
+842
+843
+844
+845
+846
+847
+848
+849
+850
+851
+852
+853
+854
+855
+856
+857
+858
+859
+860
+861
+862
+863
+864
+865
+866
+867
+868
+869
+870
+871
+872
+873
+874
+875
+876
+877
+878
+879
+880
+881
+882
+883
+884</td><td class="line-coverage"><span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">// Router.js (c) 2010-2014 Loren West and other contributors
+// May be freely distributed under the MIT license.
+// For further details and documentation:
+// http://lorenwest.github.com/node-monitor
+(function(root){
+&nbsp;
+  // Module loading
+  var Monitor = root.Monitor || require('./Monitor'),
+      log = Monitor.getLogger('Router'),
+      stat = Monitor.getStatLogger('Router'),
+      Cron = Monitor.Cron, _ = Monitor._, Backbone = Monitor.Backbone,
+      Config = Monitor.Config, Probe = Monitor.Probe,
+      Connection = Monitor.Connection, Server = Monitor.Server,
+      SocketIO = root.io || require('socket.io'),
+&nbsp;
+      // Set if server-side
+      hostName = Monitor.commonJS ? require('os').hostname() : <span class="branch-1 cbranch-no" title="branch not covered" >null;</span>
+&nbsp;
+  // Constants
+  var PROBE_TIMEOUT_MS = 10000;
+&nbsp;
+  /**
+  * Probe location and message routing
+  *
+  * The router is a class used internally to locate probes and connect
+  * events so messages are correctly routed between probes and their monitors.
+  *
+  * It is a *singleton* class, designed to run one instance within
+  * a monitor process, and accessed via the (protected) `getRouter()`
+  * method of the &lt;a href="Monitor.html"&gt;Monitor&lt;/a&gt; object.
+  *
+  * It manages all outbound requests to probes, either internally or externally
+  * via the &lt;a href="Connection.html"&gt;Connection&lt;/a&gt; to the remote process.
+  *
+  * @class Router
+  * @extends Backbone.Model
+  * @constructor
+  */
+  /**
+  * A new connection has been established
+  *
+  * @event
+  * connection:add
+  * @param connection {Connection} The added connection
+  */
+  /**
+  * A connection has been terminated
+  *
+  * @event
+  * connection:remove
+  * @param connection {Connection} The removed connection
+  */
+  var Router = Monitor.Router = Backbone.Model.extend({
+&nbsp;
+    initialize: <span class="fstat-no" title="function not covered" >function() {</span>
+<span class="cstat-no" title="statement not covered" >      var t = this;</span>
+<span class="cstat-no" title="statement not covered" >      t.defaultGateway = null;</span>
+<span class="cstat-no" title="statement not covered" >      t.firewall = false;</span>
+<span class="cstat-no" title="statement not covered" >      t.connections = new Connection.List();</span>
+<span class="cstat-no" title="statement not covered" >      t.runningProbesByKey = {}; </span>// key=probeKey, data=probeImpl
+<span class="cstat-no" title="statement not covered" >      t.runningProbesById = {}; </span> // key=probeId, data=probeImpl
+<span class="cstat-no" title="statement not covered" >      t.addHostCallbacks = {}; </span> // key=hostName, data=[callbacks]
+<span class="cstat-no" title="statement not covered" >      log.info('init', 'Router initialized');</span>
+    },
+&nbsp;
+    /**
+    * Firewall new connections from inbound probe requests
+    *
+    * When two monitor processes connect, they become peers.  By default each
+    * process can request probe connections with the other.
+    *
+    * If you want to connect with a remote probe, but don't want those servers
+    * to connect with probes in this process, call this method to firewall
+    * those inbound probe requests.
+    *
+    * Setting this will change the firewall value for all *new* connections.
+    * Any existing connections will still accept incoming probe requests.
+    *
+    * @static
+    * @method setFirewall
+    * @param firewall {Boolean} - Firewall new connections?
+    */
+    setFirewall: <span class="fstat-no" title="function not covered" >function(firewall) {</span>
+<span class="cstat-no" title="statement not covered" >      var t = Monitor.getRouter(); </span>// This is a static method
+<span class="cstat-no" title="statement not covered" >      t.firewall = firewall;</span>
+<span class="cstat-no" title="statement not covered" >      log.info('setFirewall', firewall);</span>
+    },
+&nbsp;
+    /**
+    * Set the default gateway server
+    *
+    * The gateway server is used if a monitor cannot connect directly with the
+    * server hosting the probe.
+    *
+    * When a monitor is requested to connect with a probe on a specific server,
+    * a direct connection is attempted.  If that direct connection fails, usually
+    * due to a firewall or browser restriction, the monitor will attempt the
+    * connection to the probe through the gateway server.
+    *
+    * The server specified in this method must have been started as a gateway
+    * like this:
+    *
+    *     // Start a monitor server and act as a gateway
+    *     var server = new Monitor.Server({gateway:true});
+    *
+    * @method setGateway
+    * @param options {Object} - Connection parameters
+    *   @param options.hostName {String} - Name of the gateway host
+    *   @param options.hostPort {Integer} - Port number to connect with
+    *   @param options.url {String} - The URL used to connect (created, or used if supplied)
+    *   @param options.socket {io.socket} - Pre-connected socket.io socket to the gateway server.
+    * @return connection {Connection} - The connection with the gateway server
+    */
+    setGateway: <span class="fstat-no" title="function not covered" >function(options) {</span>
+<span class="cstat-no" title="statement not covered" >      var t = this;</span>
+<span class="cstat-no" title="statement not covered" >      options.gateway = false; </span>    // New connection can't be an inbound gateway
+<span class="cstat-no" title="statement not covered" >      options.firewall = true; </span>    // Gateways are for outbound requests only
+<span class="cstat-no" title="statement not covered" >      return t.defaultGateway = t.addConnection(options);</span>
+    },
+&nbsp;
+    /**
+    * Return a stable host name.
+    *
+    * @method getHostName
+    * @protected
+    * @return hostName {String} - The platform's host name, or an otherwise stable ID
+    */
+    getHostName: <span class="fstat-no" title="function not covered" >function() {</span>
+<span class="cstat-no" title="statement not covered" >      var localStorage = root.localStorage;</span>
+<span class="cstat-no" title="statement not covered" >      if (!hostName) {</span>
+<span class="cstat-no" title="statement not covered" >        if (localStorage) {<span class="cstat-no" title="statement not covered" >hostName = localStorage.hostName;}</span></span>
+<span class="cstat-no" title="statement not covered" >        hostName = hostName || Monitor.generateUniqueId();</span>
+<span class="cstat-no" title="statement not covered" >        if (localStorage) {<span class="cstat-no" title="statement not covered" >localStorage.hostName = hostName;}</span></span>
+      }
+<span class="cstat-no" title="statement not covered" >      return hostName;</span>
+    },
+&nbsp;
+    /**
+    * Set the current host name.
+    *
+    * This sets the host name that this router publishes to new connections.
+    * It's only useful if the os hostname isn't the name you want to publish.
+    *
+    * @protected
+    * @method setHostName
+    * @param hostName {String} - The host name to publish to new connections
+    */
+    setHostName: <span class="fstat-no" title="function not covered" >function(name) {</span>
+<span class="cstat-no" title="statement not covered" >      hostName = name;</span>
+<span class="cstat-no" title="statement not covered" >      log.info('setHostName', name);</span>
+    },
+&nbsp;
+    /**
+    * Add a connection to a remote Monitor process
+    *
+    * @method addConnection
+    * @protected
+    * @param options {Object} - Connection parameters
+    *   @param options.hostName {String} - Name of the host to connect with
+    *   @param options.hostPort {Integer} - Port number to connect with
+    *   @param options.url {String} - The URL used to connect (created, or used if supplied)
+    *   @param options.socket {io.socket} - Pre-connected socket.io socket to a Monitor server.
+    *   @param options.gateway {Boolean} - Allow this connection to use me as a gateway (default false)
+    *   @param options.firewall {Boolean} Firewall inbound probe requests on this connection?
+    * @return connection {Connection} - The added connection
+    */
+    addConnection: <span class="fstat-no" title="function not covered" >function(options) {</span>
+<span class="cstat-no" title="statement not covered" >      var t = this,</span>
+          startTime = Date.now();
+&nbsp;
+      // Default the firewall value
+<span class="cstat-no" title="statement not covered" >      if (_.isUndefined(options.firewall)) {</span>
+<span class="cstat-no" title="statement not covered" >        options = _.extend({},options, {firewall: t.firewall});</span>
+      }
+&nbsp;
+      // Generate a unique ID for the connection
+<span class="cstat-no" title="statement not covered" >      options.id = Monitor.generateUniqueCollectionId(t.connections);</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered" >      var connStr = 'Conn_' + options.id;</span>
+<span class="cstat-no" title="statement not covered" >      if (options.hostName) {</span>
+<span class="cstat-no" title="statement not covered" >        connStr += ' - ' + options.hostName + ':' + options.hostPort;</span>
+      }
+<span class="cstat-no" title="statement not covered" >      log.info('addConnection', connStr);</span>
+&nbsp;
+      // Instantiate and add the connection for use, once connected
+<span class="cstat-no" title="statement not covered" >      var connection = new Connection(options);</span>
+&nbsp;
+      // Add a connect and disconnect function
+<span class="cstat-no" title="statement not covered" >      var onConnect = <span class="fstat-no" title="function not covered" >function(){</span></span>
+<span class="cstat-no" title="statement not covered" >        t.trigger('connection:add', connection);</span>
+<span class="cstat-no" title="statement not covered" >        log.info('connected', connStr, (Date.now() - startTime) + 'ms');</span>
+      };
+<span class="cstat-no" title="statement not covered" >      var onDisconnect = <span class="fstat-no" title="function not covered" >function(){</span></span>
+<span class="cstat-no" title="statement not covered" >        t.removeConnection(connection);</span>
+<span class="cstat-no" title="statement not covered" >        connection.off('connect', onConnect);</span>
+<span class="cstat-no" title="statement not covered" >        connection.off('disconnect', onConnect);</span>
+<span class="cstat-no" title="statement not covered" >        log.info('disconnected', connStr, (Date.now() - startTime) + 'ms');</span>
+      };
+<span class="cstat-no" title="statement not covered" >      connection.on('connect', onConnect);</span>
+<span class="cstat-no" title="statement not covered" >      connection.on('disconnect', onDisconnect);</span>
+&nbsp;
+      // Add to the connections
+<span class="cstat-no" title="statement not covered" >      t.connections.add(connection);</span>
+<span class="cstat-no" title="statement not covered" >      return connection;</span>
+    },
+&nbsp;
+    /**
+    * Remove a connection from the router.
+    *
+    * This is called to remove the connection and associated routes from the router.
+    *
+    * @method removeConnection
+    * @protected
+    * @param connection {Connection} - The connection to remove
+    */
+    removeConnection: <span class="fstat-no" title="function not covered" >function(connection) {</span>
+<span class="cstat-no" title="statement not covered" >      var t = this;</span>
+<span class="cstat-no" title="statement not covered" >      log.info('removeConnection', 'Conn_' + connection.id);</span>
+<span class="cstat-no" title="statement not covered" >      connection.disconnect('connection_removed');</span>
+<span class="cstat-no" title="statement not covered" >      t.connections.remove(connection);</span>
+<span class="cstat-no" title="statement not covered" >      t.trigger('connection:remove', connection);</span>
+    },
+&nbsp;
+    /**
+    * Connect a Monitor object to a remote Probe
+    *
+    * This accepts an instance of a Monitor and figures out how to connect it
+    * to a running Probe.
+    *
+    * Upon callback the probe data is set into the monitor (unless an error
+    * occurred)
+    *
+    * @method connectMonitor
+    * @protected
+    * @param monitor {Monitor} - The monitor requesting to connect with the probe
+    * @param callback {Function(error)} - (optional) Called when connected
+    */
+    connectMonitor: <span class="fstat-no" title="function not covered" >function(monitor, callback) {</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered" >      callback = callback || <span class="fstat-no" title="function not covered" >function(){</span>};</span>
+<span class="cstat-no" title="statement not covered" >      var t = this,</span>
+          monitorJSON = monitor.toMonitorJSON(),
+          probeJSON = null,
+          probeName = monitorJSON.probeName,
+          probeClass = monitorJSON.probeClass,
+          startTime = Date.now(),
+          monitorStr = probeClass + '.' + monitor.toServerString().replace(/:/g, '.');
+&nbsp;
+      // Class name must be set
+<span class="cstat-no" title="statement not covered" >      if (!probeClass &amp;&amp; !probeName) {</span>
+<span class="cstat-no" title="statement not covered" >        var errStr = 'probeName or probeClass must be set';</span>
+<span class="cstat-no" title="statement not covered" >        log.error('connectMonitor', errStr);</span>
+<span class="cstat-no" title="statement not covered" >        return callback(errStr);</span>
+      }
+&nbsp;
+      // Determine the connection (or internal), and listen for change events
+<span class="cstat-no" title="statement not covered" >      t.determineConnection(monitorJSON, true, <span class="fstat-no" title="function not covered" >function(err, connection) {</span></span>
+<span class="cstat-no" title="statement not covered" >        if (err) {<span class="cstat-no" title="statement not covered" >return callback(err);}</span></span>
+&nbsp;
+        // Function to run on connection (internal or external)
+<span class="cstat-no" title="statement not covered" >        var onConnect = <span class="fstat-no" title="function not covered" >function(error, probe) {</span></span>
+<span class="cstat-no" title="statement not covered" >          if (error) {<span class="cstat-no" title="statement not covered" >return callback(error);}</span></span>
+<span class="cstat-no" title="statement not covered" >          probeJSON = probe.toJSON();</span>
+<span class="cstat-no" title="statement not covered" >          probeJSON.probeId = probeJSON.id; <span class="cstat-no" title="statement not covered" ></span>delete probeJSON.id;</span>
+<span class="cstat-no" title="statement not covered" >          monitor.probe = probe;</span>
+&nbsp;
+          // Keep the last known probe state for effective updating
+<span class="cstat-no" title="statement not covered" >          monitor._probeValues = _.clone(probeJSON);</span>
+&nbsp;
+          // Perform the initial set silently.  This assures the initial
+          // probe contents are available on the connect event,
+          // but doesn't fire a change event before connect.
+<span class="cstat-no" title="statement not covered" >          monitor.set(probeJSON, {silent:true});</span>
+&nbsp;
+          // Watch the probe for changes.
+<span class="cstat-no" title="statement not covered" >          monitor.probeChange = <span class="fstat-no" title="function not covered" >function(){</span></span>
+<span class="cstat-no" title="statement not covered" >            var changed = probe.changedAttributes();</span>
+<span class="cstat-no" title="statement not covered" >            if (changed) {</span>
+<span class="cstat-no" title="statement not covered" >              monitor._probeValues = _.clone(probe.toJSON());</span>
+<span class="cstat-no" title="statement not covered" >              monitor.set(probe.changedAttributes());</span>
+<span class="cstat-no" title="statement not covered" >              log.info('probeChange', {probeId: probeJSON.probeId, changed: probe.changedAttributes()});</span>
+            }
+          };
+<span class="cstat-no" title="statement not covered" >          probe.on('change', monitor.probeChange);</span>
+&nbsp;
+          // Call the callback.  This calls the original caller, issues
+          // the connect event, then fires the initial change event.
+<span class="cstat-no" title="statement not covered" >          callback(null);</span>
+        };
+&nbsp;
+        // Connect internally or externally
+<span class="cstat-no" title="statement not covered" >        if (connection) {</span>
+<span class="cstat-no" title="statement not covered" >          t.connectExternal(monitorJSON, connection, onConnect);</span>
+        } else {
+<span class="cstat-no" title="statement not covered" >          t.connectInternal(monitorJSON, onConnect);</span>
+        }
+      });
+    },
+&nbsp;
+    /**
+    * Disconnect a monitor
+    *
+    * This accepts an instance of a connected monitor, and disconnects it from
+    * the remote probe.
+    *
+    * The probe implementation will be released if this is the only monitor
+    * object watching it.
+    *
+    * @method disconnectMonitor
+    * @protected
+    * @param monitor {Monitor} - The connected monitor
+    * @param reason {String} - Reason for the disconnect
+    * @param callback {Function(error)} - (optional) Called when connected
+    */
+    disconnectMonitor: <span class="fstat-no" title="function not covered" >function(monitor, reason, callback) {</span>
+<span class="cstat-no" title="statement not covered" >      callback = callback || <span class="fstat-no" title="function not covered" >function(){</span>};</span>
+<span class="cstat-no" title="statement not covered" >      var t = this, probe = monitor.probe, probeId = monitor.get('probeId');</span>
+&nbsp;
+      // The monitor must be connected
+<span class="cstat-no" title="statement not covered" >      if (!probe) {<span class="cstat-no" title="statement not covered" >return callback('Monitor must be connected');}</span></span>
+&nbsp;
+      // Called upon disconnect (internal or external)
+<span class="cstat-no" title="statement not covered" >      var onDisconnect = <span class="fstat-no" title="function not covered" >function(error) {</span></span>
+<span class="cstat-no" title="statement not covered" >        if (error) {</span>
+<span class="cstat-no" title="statement not covered" >          return callback(error);</span>
+        }
+<span class="cstat-no" title="statement not covered" >        probe.off('change', monitor.probeChange);</span>
+<span class="cstat-no" title="statement not covered" >        monitor.set({probeId:null});</span>
+<span class="cstat-no" title="statement not covered" >        monitor.probe = monitor.probeChange = null;</span>
+<span class="cstat-no" title="statement not covered" >        return callback(null, reason);</span>
+      };
+&nbsp;
+      // Disconnect from an internal or external probe
+<span class="cstat-no" title="statement not covered" >      if (probe.connection) {</span>
+<span class="cstat-no" title="statement not covered" >        t.disconnectExternal(probe.connection, probeId, onDisconnect);</span>
+      } else {
+<span class="cstat-no" title="statement not covered" >        t.disconnectInternal(probeId, onDisconnect);</span>
+      }
+    },
+&nbsp;
+    /**
+    * Build a probe key from the probe data
+    *
+    * @method buildProbeKey
+    * @protected
+    * @param probeJSON {Object} - An object containing:
+    *     @param probeJSON.probeName {String} - The client-defined probe name
+    *     -or-
+    *     @param probeJSON.probeClass {String} - The probe class name (required)
+    *     @param probeJSON.initParams {Object} - Probe initialization parameters (if any)
+    * @return probeKey {String} - A string identifying the probe
+    */
+    buildProbeKey: <span class="fstat-no" title="function not covered" >function(probeJSON) {</span>
+<span class="cstat-no" title="statement not covered" >      var probeKey = probeJSON.probeClass,</span>
+          initParams = probeJSON.initParams;
+&nbsp;
+      // Allow probes to be externally identified by name
+<span class="cstat-no" title="statement not covered" >      if (probeJSON.probeName) {</span>
+<span class="cstat-no" title="statement not covered" >        return probeJSON.probeName;</span>
+      }
+&nbsp;
+<span class="cstat-no" title="statement not covered" >      if (initParams) {</span>
+<span class="cstat-no" title="statement not covered" >        _.keys(initParams).sort().forEach(<span class="fstat-no" title="function not covered" >function(key){</span></span>
+<span class="cstat-no" title="statement not covered" >          probeKey += ':' + key + '=' + initParams[key];</span>
+        });
+      }
+<span class="cstat-no" title="statement not covered" >      return probeKey;</span>
+    },
+&nbsp;
+    /**
+    * Determine the connection to use for a probe
+    *
+    * This uses the connection parameters of the specified monitor to determine
+    * (or create) the connection to use for the probe.
+    *
+    * If the probe can be instantiated internally, a null is returned as the
+    * connection.
+    *
+    * This attempts to use an existing connection if available.  If not, a
+    * connection attempt will be made with the host. If the host cannot be
+    * reached directly, it returns a connection with the gateway.
+    *
+    * @method determineConnection
+    * @protected
+    * @param monitorJSON {Object} - The connection attributes of the monitor
+    * @param makeNewConnections {Boolean} - Establish a new connection if one doesn't exist?
+    * @param callback {Function(error, connection)} - Called when the connection is known
+    * &lt;ul&gt;
+    *   &lt;li&gt;error - Set if any errors&lt;/li&gt;
+    *   &lt;li&gt;connection - The connection object, or null to run in this process&lt;/li&gt;
+    * &lt;ul&gt;
+    */
+    determineConnection: <span class="fstat-no" title="function not covered" >function(monitorJSON, makeNewConnections, callback) {</span>
+<span class="cstat-no" title="statement not covered" >      var t = this,</span>
+          connection = null,
+          probeName = monitorJSON.probeName,
+          probeClass = monitorJSON.probeClass,
+          errStr = '',
+          hostName = monitorJSON.hostName,
+          appName = monitorJSON.appName,
+          appInstance = monitorJSON.appInstance,
+          thisHostName = t.getHostName().toLowerCase(),
+          thisAppName = Config.Monitor.appName  || 'unknown',
+          thisAppInstance = typeof process !== 'undefined' ? process.env.NODE_APP_INSTANCE : '1';
+&nbsp;
+      // Return a found connection immediately if it's connected.
+      // If connecting, wait for connection to complete.
+      // If not connected (and not connecting) re-try the connection.
+<span class="cstat-no" title="statement not covered" >      var connectedCheck = <span class="fstat-no" title="function not covered" >function(isGateway) {</span></span>
+&nbsp;
+        // Remove the host/app/instance params if connecting directly.
+<span class="cstat-no" title="statement not covered" >        if (!isGateway) {</span>
+<span class="cstat-no" title="statement not covered" >          delete monitorJSON.hostName;</span>
+<span class="cstat-no" title="statement not covered" >          delete monitorJSON.appName;</span>
+<span class="cstat-no" title="statement not covered" >          delete monitorJSON.appInstance;</span>
+        }
+&nbsp;
+        // Define the connect/error listeners
+<span class="cstat-no" title="statement not covered" >        var onConnect = <span class="fstat-no" title="function not covered" >function() {</span></span>
+<span class="cstat-no" title="statement not covered" >          removeListeners();</span>
+<span class="cstat-no" title="statement not covered" >          callback(null, connection);</span>
+        };
+<span class="cstat-no" title="statement not covered" >        var onError = <span class="fstat-no" title="function not covered" >function(err) {</span></span>
+<span class="cstat-no" title="statement not covered" >          removeListeners();</span>
+<span class="cstat-no" title="statement not covered" >          log.error('connect.error', err);</span>
+<span class="cstat-no" title="statement not covered" >          callback({msg: 'connection error', err:err});</span>
+        };
+<span class="cstat-no" title="statement not covered" >        var removeListeners = <span class="fstat-no" title="function not covered" >function() {</span></span>
+<span class="cstat-no" title="statement not covered" >          connection.off('connect', onConnect);</span>
+<span class="cstat-no" title="statement not covered" >          connection.off('error', onError);</span>
+        };
+&nbsp;
+        // Wait if the connection is still awaiting connect
+<span class="cstat-no" title="statement not covered" >        if (connection &amp;&amp; connection.connecting) {</span>
+<span class="cstat-no" title="statement not covered" >          connection.on('connect', onConnect);</span>
+<span class="cstat-no" title="statement not covered" >          connection.on('error', onError);</span>
+<span class="cstat-no" title="statement not covered" >          return;</span>
+        }
+&nbsp;
+        // Re-try if disconnected
+<span class="cstat-no" title="statement not covered" >        if (connection &amp;&amp; !connection.connected) {</span>
+<span class="cstat-no" title="statement not covered" >          connection.on('connect', onConnect);</span>
+<span class="cstat-no" title="statement not covered" >          connection.on('error', onError);</span>
+<span class="cstat-no" title="statement not covered" >          return connection.connect();</span>
+        }
+&nbsp;
+        // Verified connection
+<span class="cstat-no" title="statement not covered" >        return callback(null, connection);</span>
+      };
+&nbsp;
+      // Connect with this process (internally)?
+<span class="cstat-no" title="statement not covered" >      hostName = hostName ? hostName.toLowerCase() : null;</span>
+<span class="cstat-no" title="statement not covered" >      var thisHost = (!hostName || hostName === thisHostName);</span>
+<span class="cstat-no" title="statement not covered" >      var thisApp = (!appName || appName === thisAppName);</span>
+<span class="cstat-no" title="statement not covered" >      var thisInstance = (!appInstance || appInstance === thisAppInstance);</span>
+<span class="cstat-no" title="statement not covered" >      if (thisHost &amp;&amp; thisApp &amp;&amp; thisInstance) {</span>
+&nbsp;
+        // Connect internally if the probe is available
+<span class="cstat-no" title="statement not covered" >        if (t.runningProbesByKey[probeName] || Probe.classes[probeClass] != null) {</span>
+<span class="cstat-no" title="statement not covered" >          return callback(null, null);</span>
+        }
+&nbsp;
+        // Give named auto-start probes time to start up
+<span class="cstat-no" title="statement not covered" >        var autoStarts = Monitor.Config.Monitor.autoStart;</span>
+<span class="cstat-no" title="statement not covered" >        if (probeName &amp;&amp; !probeClass &amp;&amp; autoStarts.length) {</span>
+<span class="cstat-no" title="statement not covered" >          var autoStart = Monitor._.find(autoStarts, <span class="fstat-no" title="function not covered" >function(probeDef) {</span></span>
+<span class="cstat-no" title="statement not covered" >            return probeDef.probeName === probeName;</span>
+          });
+<span class="cstat-no" title="statement not covered" >          if (autoStart) {</span>
+<span class="cstat-no" title="statement not covered" >            setTimeout(<span class="fstat-no" title="function not covered" >function() {</span></span>
+<span class="cstat-no" title="statement not covered" >              t.determineConnection(monitorJSON, makeNewConnections, callback);</span>
+            },10);
+<span class="cstat-no" title="statement not covered" >            return;</span>
+          }
+        }
+&nbsp;
+        // No probe with that name in this process.
+        // Fallback to the default gateway.
+<span class="cstat-no" title="statement not covered" >        if (!t.defaultGateway) {</span>
+<span class="cstat-no" title="statement not covered" >          errStr = 'Probe class "' + probeClass + '" not available in this process';</span>
+<span class="cstat-no" title="statement not covered" >          log.error('connect.internal', errStr);</span>
+<span class="cstat-no" title="statement not covered" >          return callback({err:errStr});</span>
+        }
+<span class="cstat-no" title="statement not covered" >        connection = t.defaultGateway;</span>
+<span class="cstat-no" title="statement not covered" >        return connectedCheck(true);</span>
+      }
+&nbsp;
+      // Return if connection is known
+<span class="cstat-no" title="statement not covered" >      connection = t.findConnection(hostName, appName, appInstance);</span>
+<span class="cstat-no" title="statement not covered" >      if (connection) {</span>
+<span class="cstat-no" title="statement not covered" >        return connectedCheck();</span>
+      }
+&nbsp;
+      // Prefer the gateway if it exists
+<span class="cstat-no" title="statement not covered" >      if (t.defaultGateway) {</span>
+<span class="cstat-no" title="statement not covered" >        connection = t.defaultGateway;</span>
+<span class="cstat-no" title="statement not covered" >        return connectedCheck(true);</span>
+      }
+&nbsp;
+      // See if we can establish new connections with the host
+<span class="cstat-no" title="statement not covered" >      if (hostName &amp;&amp; makeNewConnections) {</span>
+<span class="cstat-no" title="statement not covered" >        t.addHostConnections(hostName, <span class="fstat-no" title="function not covered" >function(err) {</span></span>
+<span class="cstat-no" title="statement not covered" >          if (err) {</span>
+<span class="cstat-no" title="statement not covered" >            log.error('connect.toHost', err);</span>
+<span class="cstat-no" title="statement not covered" >            return callback(err);</span>
+          }
+&nbsp;
+          // Try finding now that new connections have been made
+<span class="cstat-no" title="statement not covered" >          connection = t.findConnection(hostName, appName, appInstance);</span>
+<span class="cstat-no" title="statement not covered" >          if (!connection) {</span>
+<span class="cstat-no" title="statement not covered" >            errStr = 'No route to host: ' + Monitor.toServerString(monitorJSON);</span>
+<span class="cstat-no" title="statement not covered" >            log.error('connect.toHost', errStr);</span>
+<span class="cstat-no" title="statement not covered" >            return callback({err:errStr});</span>
+          }
+&nbsp;
+<span class="cstat-no" title="statement not covered" >          return connectedCheck();</span>
+        });
+&nbsp;
+        // Wait for addHostConnections to complete
+<span class="cstat-no" title="statement not covered" >        return;</span>
+      }
+&nbsp;
+      // We tried...
+<span class="cstat-no" title="statement not covered" >      if (!hostName) {</span>
+        // App name was specified, it wasn't this process, and no hostname
+<span class="cstat-no" title="statement not covered" >        errStr = 'No host specified for app: ' + appName;</span>
+<span class="cstat-no" title="statement not covered" >        log.error('connect', errStr);</span>
+<span class="cstat-no" title="statement not covered" >        return callback({msg:errStr},null);</span>
+      } else {
+        // Not allowed to try remote hosts
+<span class="cstat-no" title="statement not covered" >        errStr = 'Not a gateway to remote monitors';</span>
+<span class="cstat-no" title="statement not covered" >        log.error('connect', errStr);</span>
+<span class="cstat-no" title="statement not covered" >        return callback({msg:errStr});</span>
+      }
+    },
+&nbsp;
+    /**
+    * Find an existing connection to use
+    *
+    * This method looks into the existing known connections to find one
+    * that matches the specified parameters.
+    *
+    * Firewalled connections are not returned.
+    *
+    * @method findConnection
+    * @protected
+    * @param hostName {String} - Host name to find a connection for (null = any host)
+    * @param appName {String} - App name to find a connection with (null = any app)
+    * @param appInstance {Any} - Application instance running on this host (null = any instance)
+    * @return connection {Connection} - A Connection object if found, otherwise null
+    */
+    findConnection: <span class="fstat-no" title="function not covered" >function(hostName, appName, appInstance) {</span>
+<span class="cstat-no" title="statement not covered" >      var t = this, thisInstance = 0;</span>
+<span class="cstat-no" title="statement not covered" >      return t.connections.find(<span class="fstat-no" title="function not covered" >function(conn) {</span></span>
+&nbsp;
+        // Host or app matches if not specified or if specified and equal
+<span class="cstat-no" title="statement not covered" >        var matchesHost = !hostName || conn.isThisHost(hostName);</span>
+<span class="cstat-no" title="statement not covered" >        var matchesApp = !appName || appName === conn.get('remoteAppName');</span>
+<span class="cstat-no" title="statement not covered" >        var matchesInstance = !appInstance || appInstance === conn.get('remoteAppInstance');</span>
+<span class="cstat-no" title="statement not covered" >        var remoteFirewall = conn.get('remoteFirewall');</span>
+&nbsp;
+        // This is a match if host + app + instance matches, and it's not firewalled
+<span class="cstat-no" title="statement not covered" >        return (!remoteFirewall &amp;&amp; matchesHost &amp;&amp; matchesApp &amp;&amp; matchesInstance);</span>
+      });
+    },
+&nbsp;
+    /**
+    * Find all connections matching the selection criteria
+    *
+    * This method looks into the existing known connections to find all
+    * that match the specified parameters.
+    *
+    * Firewalled connections are not returned.
+    *
+    * @method findConnections
+    * @protected
+    * @param hostName {String} - Host name to search for (null = any host)
+    * @param appName {String} - App name to search for (null = any app)
+    * @return connections {Array of Connection} - An array of Connection objects matching the criteria
+    */
+    findConnections: <span class="fstat-no" title="function not covered" >function(hostName, appName) {</span>
+<span class="cstat-no" title="statement not covered" >      var t = this;</span>
+<span class="cstat-no" title="statement not covered" >      return t.connections.filter(<span class="fstat-no" title="function not covered" >function(conn) {</span></span>
+&nbsp;
+        // Host or app matches if not specified or if specified and equal
+<span class="cstat-no" title="statement not covered" >        var matchesHost = !hostName || conn.isThisHost(hostName);</span>
+<span class="cstat-no" title="statement not covered" >        var matchesApp = !appName || appName === conn.get('remoteAppName');</span>
+<span class="cstat-no" title="statement not covered" >        var remoteFirewall = conn.get('remoteFirewall');</span>
+&nbsp;
+        // This is a match if host + app matches, and it's not firewalled
+<span class="cstat-no" title="statement not covered" >        return (!remoteFirewall &amp;&amp; matchesHost &amp;&amp; matchesApp);</span>
+      });
+    },
+&nbsp;
+    /**
+    * Add connections for the specified host
+    *
+    * This performs a scan of monitor ports on the server, and adds connections
+    * for newly discovered servers.
+    *
+    * It can take a while to complete, and if called for the same host before
+    * completion, it will save the callback and call all callbacks when the
+    * original task is complete.
+    *
+    * @method addHostConnections
+    * @protected
+    * @param hostName {String} - The host to add connections with
+    * @param callback {Function(error)} - Called when complete
+    */
+    addHostConnections: <span class="fstat-no" title="function not covered" >function(hostName, callback) {</span>
+<span class="cstat-no" title="statement not covered" >      var t = this,</span>
+          errStr = '',
+          connectedPorts = [],
+          portStart = Config.Monitor.serviceBasePort,
+          portEnd = Config.Monitor.serviceBasePort + Config.Monitor.portsToScan - 1;
+&nbsp;
+      // Create an array to hold callbacks for this host
+<span class="cstat-no" title="statement not covered" >      if (!t.addHostCallbacks[hostName]) {</span>
+<span class="cstat-no" title="statement not covered" >        t.addHostCallbacks[hostName] = [];</span>
+      }
+&nbsp;
+      // Remember this callback and return if we're already adding connections for this host
+<span class="cstat-no" title="statement not covered" >      if (t.addHostCallbacks[hostName].push(callback) &gt; 1) {</span>
+<span class="cstat-no" title="statement not covered" >        return;</span>
+      }
+&nbsp;
+      // Called when done
+<span class="cstat-no" title="statement not covered" >      var doneAdding = <span class="fstat-no" title="function not covered" >function(error) {</span></span>
+<span class="cstat-no" title="statement not covered" >        t.addHostCallbacks[hostName].forEach(<span class="fstat-no" title="function not covered" >function(cb) {</span></span>
+<span class="cstat-no" title="statement not covered" >          cb(error);</span>
+        });
+<span class="cstat-no" title="statement not covered" >        delete t.addHostCallbacks[hostName];</span>
+      };
+&nbsp;
+      // Build the list of ports already connected
+<span class="cstat-no" title="statement not covered" >      t.connections.each(<span class="fstat-no" title="function not covered" >function(connection){</span></span>
+<span class="cstat-no" title="statement not covered" >        var host = connection.get('hostName').toLowerCase();</span>
+<span class="cstat-no" title="statement not covered" >        var port = connection.get('hostPort');</span>
+<span class="cstat-no" title="statement not covered" >        if (host === hostName &amp;&amp; port &gt;= portStart &amp;&amp; port &lt;= portEnd) {</span>
+<span class="cstat-no" title="statement not covered" >          connectedPorts.push(port);</span>
+        }
+      });
+&nbsp;
+      // Scan non-connected ports
+<span class="cstat-no" title="statement not covered" >      var portsToScan = Config.Monitor.portsToScan - connectedPorts.length;</span>
+<span class="cstat-no" title="statement not covered" >      if (portsToScan === 0) {</span>
+<span class="cstat-no" title="statement not covered" >        errStr = 'All monitor ports in use.  Increase the Config.Monitor.portsToScan configuration';</span>
+<span class="cstat-no" title="statement not covered" >        log.error('addHostConnections', errStr);</span>
+<span class="cstat-no" title="statement not covered" >        return doneAdding(errStr);</span>
+      }
+<span class="cstat-no" title="statement not covered" >      var doneScanning = <span class="fstat-no" title="function not covered" >function() {</span></span>
+<span class="cstat-no" title="statement not covered" >        var conn = this; </span>// called in the context of the connection
+<span class="cstat-no" title="statement not covered" >        conn.off('connect disconnect error', doneScanning);</span>
+<span class="cstat-no" title="statement not covered" >        if (--portsToScan === 0) {</span>
+<span class="cstat-no" title="statement not covered" >          return doneAdding();</span>
+        }
+      };
+<span class="cstat-no" title="statement not covered" >      for (var i = portStart; i &lt;= portEnd; i++) {</span>
+<span class="cstat-no" title="statement not covered" >        if (connectedPorts.indexOf(i) &lt; 0) {</span>
+<span class="cstat-no" title="statement not covered" >          var connection = t.addConnection({hostName:hostName, hostPort:i});</span>
+<span class="cstat-no" title="statement not covered" >          connection.on('connect disconnect error', doneScanning, connection);</span>
+        }
+      }
+    },
+&nbsp;
+    /**
+    * Connect to an internal probe implementation
+    *
+    * This connects with a probe running in this process.  It will instantiate
+    * the probe if it isn't currently running.
+    *
+    * @method connectInternal
+    * @protected
+    * @param monitorJSON {Object} - The monitor toJSON data.  Containing:
+    *     @param monitorJSON.probeClass {String} - The probe class name to connect with (required)
+    *     @param monitorJSON.initParams {Object} - Probe initialization parameters.
+    * @param callback {Function(error, probeImpl)} - Called when connected
+    */
+    connectInternal: <span class="fstat-no" title="function not covered" >function(monitorJSON, callback) {</span>
+&nbsp;
+      // Build a key for this probe from the probeClass and initParams
+<span class="cstat-no" title="statement not covered" >      var t = this,</span>
+          probeKey = t.buildProbeKey(monitorJSON),
+          probeName = monitorJSON.probeName,
+          probeClass = monitorJSON.probeClass,
+          initParams = monitorJSON.initParams,
+          probeImpl = null;
+&nbsp;
+<span class="cstat-no" title="statement not covered" >      var whenDone = <span class="fstat-no" title="function not covered" >function(error) {</span></span>
+&nbsp;
+        // Wait one tick before firing the callback.  This simulates a remote
+        // connection, making the client callback order consistent, regardless
+        // of a local or remote connection.
+<span class="cstat-no" title="statement not covered" >        setTimeout(<span class="fstat-no" title="function not covered" >function() {</span></span>
+&nbsp;
+          // Dont connect the probe on error
+<span class="cstat-no" title="statement not covered" >          if (error) {</span>
+<span class="cstat-no" title="statement not covered" >            if (probeImpl) {</span>
+<span class="cstat-no" title="statement not covered" >              delete t.runningProbesByKey[probeKey];</span>
+<span class="cstat-no" title="statement not covered" >              delete t.runningProbesById[probeImpl.id];</span>
+<span class="cstat-no" title="statement not covered" >              try {</span>
+                // This may fail depending on how many resources were created
+                // by the probe before failure.  Ignore errors.
+<span class="cstat-no" title="statement not covered" >                probeImpl.release();</span>
+              } catch (e){}
+            }
+<span class="cstat-no" title="statement not covered" >            return callback(error);</span>
+          }
+&nbsp;
+          // Probes are released based on reference count
+<span class="cstat-no" title="statement not covered" >          probeImpl.refCount++;</span>
+<span class="cstat-no" title="statement not covered" >          log.info('connectInternal', {probeKey: probeKey, probeId: probeImpl.id});</span>
+<span class="cstat-no" title="statement not covered" >          callback(null, probeImpl);</span>
+        }, 0);
+      };
+&nbsp;
+      // Get the probe instance
+<span class="cstat-no" title="statement not covered" >      probeImpl = t.runningProbesByKey[probeKey];</span>
+<span class="cstat-no" title="statement not covered" >      if (!probeImpl) {</span>
+&nbsp;
+        // Instantiate the probe
+<span class="cstat-no" title="statement not covered" >        var ProbeClass = Probe.classes[probeClass];</span>
+<span class="cstat-no" title="statement not covered" >        if (!ProbeClass) {</span>
+<span class="cstat-no" title="statement not covered" >          return whenDone({msg:'Probe not available: ' + probeClass});</span>
+        }
+<span class="cstat-no" title="statement not covered" >        var initOptions = {asyncInit: false, callback: whenDone};</span>
+<span class="cstat-no" title="statement not covered" >        try {</span>
+          // Deep copy the init params, because Backbone mutates them.  This
+          // is bad if the init params came in from defaults of another object,
+          // because those defaults will get mutated.
+<span class="cstat-no" title="statement not covered" >          var paramCopy = Monitor.deepCopy(initParams);</span>
+&nbsp;
+          // Extend the probe name into the probe if known
+<span class="cstat-no" title="statement not covered" >          if (probeName) {</span>
+<span class="cstat-no" title="statement not covered" >            paramCopy.probeName = probeName;</span>
+          }
+&nbsp;
+          // Instantiate a new probe
+<span class="cstat-no" title="statement not covered" >          probeImpl = new ProbeClass(paramCopy, initOptions);</span>
+<span class="cstat-no" title="statement not covered" >          probeImpl.set({</span>
+            id: Monitor.generateUniqueId(),
+            writableAttributes: ProbeClass.prototype.writableAttributes || []
+          });
+<span class="cstat-no" title="statement not covered" >          probeImpl.refCount = 0;</span>
+<span class="cstat-no" title="statement not covered" >          probeImpl.probeKey = probeKey;</span>
+<span class="cstat-no" title="statement not covered" >          t.runningProbesByKey[probeKey] = probeImpl;</span>
+<span class="cstat-no" title="statement not covered" >          t.runningProbesById[probeImpl.id] = probeImpl;</span>
+        } catch (e) {
+<span class="cstat-no" title="statement not covered" >          var error = {msg: 'Error instantiating probe ' + probeClass, error: e.message};</span>
+<span class="cstat-no" title="statement not covered" >          return whenDone(error);</span>
+        }
+&nbsp;
+        // Return early if the probe constructor transferred responsibility
+        // for calling the callback.
+<span class="cstat-no" title="statement not covered" >        if (initOptions.asyncInit) {</span>
+<span class="cstat-no" title="statement not covered" >          return;</span>
+        }
+      }
+&nbsp;
+      // The probe impl is found, and instantiated if necessary
+<span class="cstat-no" title="statement not covered" >      whenDone();</span>
+    },
+&nbsp;
+    /**
+    * Disconnect with an internal probe implementation.
+    *
+    * @method disconnectInternal
+    * @protected
+    * @param probeId {String} - The probe implementation ID to disconnect
+    * @param callback {Function(error, probeImpl)} - Called when disconnected
+    */
+    disconnectInternal: <span class="fstat-no" title="function not covered" >function(probeId, callback) {</span>
+<span class="cstat-no" title="statement not covered" >      var t = this, probeImpl = t.runningProbesById[probeId];</span>
+<span class="cstat-no" title="statement not covered" >      if (!probeImpl) {<span class="cstat-no" title="statement not covered" >return callback('Probe not running');}</span></span>
+<span class="cstat-no" title="statement not covered" >      if (--probeImpl.refCount === 0) {</span>
+&nbsp;
+        // Release probe resources &amp; internal references if still no references after a while
+<span class="cstat-no" title="statement not covered" >        setTimeout(<span class="fstat-no" title="function not covered" >function() {</span></span>
+<span class="cstat-no" title="statement not covered" >          if (probeImpl.refCount === 0) {</span>
+<span class="cstat-no" title="statement not covered" >            try {</span>
+<span class="cstat-no" title="statement not covered" >              probeImpl.release();</span>
+            } catch (e){}
+<span class="cstat-no" title="statement not covered" >            delete t.runningProbesByKey[probeImpl.probeKey];</span>
+<span class="cstat-no" title="statement not covered" >            delete t.runningProbesById[probeId];</span>
+          }
+        }, PROBE_TIMEOUT_MS);
+      }
+<span class="cstat-no" title="statement not covered" >      callback(null, probeImpl);</span>
+    },
+&nbsp;
+    /**
+    * Connect to an external probe implementation.
+    *
+    * This connects with a probe running in another process.  It will
+    * coordinate the remote instantiation of the probe if it's not running.
+    *
+    * @method connectExternal
+    * @protected
+    * @param monitorJSON {Object} - An object containing:
+    *     @param monitorJSON.probeClass {String} - The probe class name (required)
+    *     @param monitorJSON.initParams {Object} - Probe initialization parameters (if any)
+    * @param connection {Connection} - The connection to use
+    * @param callback {Function(error, probeProxy)} - Called when connected
+    */
+    connectExternal: <span class="fstat-no" title="function not covered" >function(monitorJSON, connection, callback) {</span>
+&nbsp;
+      // Build a key for this probe from the probeClass and initParams
+<span class="cstat-no" title="statement not covered" >      var t = this,</span>
+          errStr = '',
+          probeKey = t.buildProbeKey(monitorJSON);
+&nbsp;
+      // Get the probe proxy
+<span class="cstat-no" title="statement not covered" >      var probeId = connection.remoteProbeIdsByKey[probeKey];</span>
+<span class="cstat-no" title="statement not covered" >      var probeProxy = connection.remoteProbesById[probeId];</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered" >      if (!probeProxy) {</span>
+&nbsp;
+        // Connect with the remote probe
+<span class="cstat-no" title="statement not covered" >        connection.emit('probe:connect', monitorJSON, <span class="fstat-no" title="function not covered" >function(error, probeJSON){</span></span>
+<span class="cstat-no" title="statement not covered" >          if (error) {</span>
+<span class="cstat-no" title="statement not covered" >            errStr = "probe:connect returned an error for probeClass '" + monitorJSON.probeClass +</span>
+              "' on " + Monitor.toServerString(monitorJSON);
+<span class="cstat-no" title="statement not covered" >            return callback({err: error, msg: errStr});</span>
+          }
+<span class="cstat-no" title="statement not covered" >          probeId = probeJSON.id;</span>
+&nbsp;
+          // See if the proxy was created while waiting for return
+<span class="cstat-no" title="statement not covered" >          probeProxy = connection.remoteProbesById[probeId];</span>
+<span class="cstat-no" title="statement not covered" >          if (probeProxy) {</span>
+<span class="cstat-no" title="statement not covered" >            probeProxy.refCount++;</span>
+<span class="cstat-no" title="statement not covered" >            log.info('connectExternal.connected.existingProxy', {probeId: probeId, refCount: probeProxy.refCount, whileWaiting: true});</span>
+<span class="cstat-no" title="statement not covered" >            return callback(null, probeProxy);</span>
+          }
+&nbsp;
+          // Create the probe proxy
+<span class="cstat-no" title="statement not covered" >          probeProxy = new Probe(probeJSON);</span>
+<span class="cstat-no" title="statement not covered" >          probeProxy.refCount = 1;</span>
+<span class="cstat-no" title="statement not covered" >          probeProxy.connection = connection;</span>
+<span class="cstat-no" title="statement not covered" >          connection.remoteProbeIdsByKey[probeKey] = probeId;</span>
+<span class="cstat-no" title="statement not covered" >          connection.remoteProbesById[probeId] = probeProxy;</span>
+<span class="cstat-no" title="statement not covered" >          connection.addEvent('probe:change:' + probeId, <span class="fstat-no" title="function not covered" >function(attrs){<span class="cstat-no" title="statement not covered" ></span>probeProxy.set(attrs);}</span>);</span>
+<span class="cstat-no" title="statement not covered" >          log.info('connectExternal.connected.newProxy', {probeId: probeId});</span>
+<span class="cstat-no" title="statement not covered" >          return callback(null, probeProxy);</span>
+        });
+<span class="cstat-no" title="statement not covered" >        return;</span>
+      }
+&nbsp;
+      // Probes are released based on reference count
+<span class="cstat-no" title="statement not covered" >      probeProxy.refCount++;</span>
+<span class="cstat-no" title="statement not covered" >      log.info('connectExternal.connected.existingProxy', {probeId: probeId, refCount: probeProxy.refCount});</span>
+<span class="cstat-no" title="statement not covered" >      return callback(null, probeProxy);</span>
+    },
+&nbsp;
+    /**
+    * Disconnect with an external probe implementation.
+    *
+    * @method disconnectExternal
+    * @protected
+    * @param connection {Connection} - The connection to use
+    * @param probeId {String} - Probe ID
+    * @param callback {Function(error)} - Called when disconnected
+    */
+    disconnectExternal: <span class="fstat-no" title="function not covered" >function(connection, probeId, callback) {</span>
+<span class="cstat-no" title="statement not covered" >      var t = this, proxy = connection.remoteProbesById[probeId];</span>
+<span class="cstat-no" title="statement not covered" >      if (!proxy) {<span class="cstat-no" title="statement not covered" >return callback('Probe not running');}</span></span>
+<span class="cstat-no" title="statement not covered" >      if (--proxy.refCount === 0) {</span>
+        // Release probe resources
+<span class="cstat-no" title="statement not covered" >        proxy.release();</span>
+<span class="cstat-no" title="statement not covered" >        proxy.connection = null;</span>
+<span class="cstat-no" title="statement not covered" >        delete connection.remoteProbesById[probeId];</span>
+<span class="cstat-no" title="statement not covered" >        delete connection.remoteProbeIdsByKey[proxy.probeKey];</span>
+<span class="cstat-no" title="statement not covered" >        connection.removeEvent('probe:change:' + probeId);</span>
+<span class="cstat-no" title="statement not covered" >        return connection.emit('probe:disconnect', {probeId:probeId}, <span class="fstat-no" title="function not covered" >function(error){</span></span>
+<span class="cstat-no" title="statement not covered" >          return callback(error);</span>
+        });
+      }
+<span class="cstat-no" title="statement not covered" >      callback(null);</span>
+    }
+&nbsp;
+  });
+&nbsp;
+}(this));
+&nbsp;
+&nbsp;</pre></td></tr>
+</table></pre>
+</div>
+<div class="footer">
+    <div class="meta">Generated by <a href="https://github.com/kaizhu256/node-utility2" target="_blank">utility2</a> at Tue Apr 11 2017 13:16:43 GMT+0000 (UTC)</div>
+</div>
+</body>
+</html>
