@@ -1,7 +1,10 @@
-# test coverage for  [monitor (v0.6.10)](http://lorenwest.github.com/node-monitor/)  [![npm package](https://img.shields.io/npm/v/npmtest-monitor.svg?style=flat-square)](https://www.npmjs.org/package/npmtest-monitor) [![travis-ci.org build-status](https://api.travis-ci.org/npmtest/node-npmtest-monitor.svg)](https://travis-ci.org/npmtest/node-npmtest-monitor)
+# npmtest-monitor
+
+#### test coverage for  [monitor (v0.6.10)](http://lorenwest.github.com/node-monitor/)  [![npm package](https://img.shields.io/npm/v/npmtest-monitor.svg?style=flat-square)](https://www.npmjs.org/package/npmtest-monitor) [![travis-ci.org build-status](https://api.travis-ci.org/npmtest/node-npmtest-monitor.svg)](https://travis-ci.org/npmtest/node-npmtest-monitor)
+
 #### Runtime monitoring for node.js applications
 
-[![NPM](https://nodei.co/npm/monitor.png?downloads=true)](https://www.npmjs.com/package/monitor)
+[![NPM](https://nodei.co/npm/monitor.png?downloads=true&downloadRank=true&stars=true)](https://www.npmjs.com/package/monitor)
 
 | git-branch : | [alpha](https://github.com/npmtest/node-npmtest-monitor/tree/alpha)|
 |--:|:--|
@@ -9,11 +12,17 @@
 | test-report : | [![test-report](https://npmtest.github.io/node-npmtest-monitor/build/test-report.badge.svg)](https://npmtest.github.io/node-npmtest-monitor/build/test-report.html)|
 | build-artifacts : | [![build-artifacts](https://npmtest.github.io/node-npmtest-monitor/glyphicons_144_folder_open.png)](https://github.com/npmtest/node-npmtest-monitor/tree/gh-pages/build)|
 
-[![istanbul-coverage](https://npmtest.github.io/node-npmtest-monitor/build/screenCapture.buildCustomOrg.browser.coverage.html.png)](https://npmtest.github.io/node-npmtest-monitor/build/coverage.html/index.html)
+- [https://npmtest.github.io/node-npmtest-monitor/build/coverage.html/index.html](https://npmtest.github.io/node-npmtest-monitor/build/coverage.html/index.html)
 
-[![test-report](https://npmtest.github.io/node-npmtest-monitor/build/screenCapture.buildCustomOrg.browser.%252Fhome%252Ftravis%252Fbuild%252Fnpmtest%252Fnode-npmtest-monitor%252Ftmp%252Fbuild%252Ftest-report.html.png)](https://npmtest.github.io/node-npmtest-monitor/build/test-report.html)
+[![istanbul-coverage](https://npmtest.github.io/node-npmtest-monitor/build/screenCapture.buildCi.browser.%252Ftmp%252Fbuild%252Fcoverage.lib.html.png)](https://npmtest.github.io/node-npmtest-monitor/build/coverage.html/index.html)
 
-[![apidoc](https://npmdoc.github.io/node-npmdoc-monitor/build/screenCapture.buildApidoc.browser.%252Fhome%252Ftravis%252Fbuild%252Fnpmdoc%252Fnode-npmdoc-monitor%252Ftmp%252Fbuild%252Fapidoc.html.png)](https://npmdoc.github.io/node-npmdoc-monitor/build/apidoc.html)
+- [https://npmtest.github.io/node-npmtest-monitor/build/test-report.html](https://npmtest.github.io/node-npmtest-monitor/build/test-report.html)
+
+[![test-report](https://npmtest.github.io/node-npmtest-monitor/build/screenCapture.buildCi.browser.%252Ftmp%252Fbuild%252Ftest-report.html.png)](https://npmtest.github.io/node-npmtest-monitor/build/test-report.html)
+
+- [https://npmdoc.github.io/node-npmdoc-monitor/build/apidoc.html](https://npmdoc.github.io/node-npmdoc-monitor/build/apidoc.html)
+
+[![apidoc](https://npmdoc.github.io/node-npmdoc-monitor/build/screenCapture.buildCi.browser.%252Ftmp%252Fbuild%252Fapidoc.html.png)](https://npmdoc.github.io/node-npmdoc-monitor/build/apidoc.html)
 
 ![npmPackageListing](https://npmtest.github.io/node-npmtest-monitor/build/screenCapture.npmPackageListing.svg)
 
@@ -28,7 +37,6 @@
 {
     "author": {
         "name": "Loren West",
-        "email": "open_source@lorenwest.com",
         "url": "https://github.com/lorenwest"
     },
     "bugs": {
@@ -73,13 +81,11 @@
     "main": "./lib/index.js",
     "maintainers": [
         {
-            "name": "lorenwest",
-            "email": "npm@lorenwest.com"
+            "name": "lorenwest"
         }
     ],
     "name": "monitor",
     "optionalDependencies": {},
-    "readme": "ERROR: No README data found!",
     "repository": {
         "type": "git",
         "url": "git://github.com/lorenwest/node-monitor.git"
