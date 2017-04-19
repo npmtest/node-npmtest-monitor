@@ -1,6 +1,6 @@
 # npmtest-monitor
 
-#### test coverage for  [monitor (v0.6.10)](http://lorenwest.github.com/node-monitor/)  [![npm package](https://img.shields.io/npm/v/npmtest-monitor.svg?style=flat-square)](https://www.npmjs.org/package/npmtest-monitor) [![travis-ci.org build-status](https://api.travis-ci.org/npmtest/node-npmtest-monitor.svg)](https://travis-ci.org/npmtest/node-npmtest-monitor)
+#### basic test coverage for  [monitor (v0.6.10)](http://lorenwest.github.com/node-monitor/)  [![npm package](https://img.shields.io/npm/v/npmtest-monitor.svg?style=flat-square)](https://www.npmjs.org/package/npmtest-monitor) [![travis-ci.org build-status](https://api.travis-ci.org/npmtest/node-npmtest-monitor.svg)](https://travis-ci.org/npmtest/node-npmtest-monitor)
 
 #### Runtime monitoring for node.js applications
 
